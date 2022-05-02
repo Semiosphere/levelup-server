@@ -1,0 +1,26 @@
+[
+    {
+        "model": "levelupapi.game",
+        "pk": 1,
+        "fields": {
+            "title": "Twilight Imperium",
+            "game_type": 1,
+            "gamer": 1,
+            "maker": "Fantasy Flight",
+            "number_of_players": "8",
+            "skill_level": "10"
+        }
+    },
+    {
+        "model": "levelupapi.game",
+        "pk": 1,
+        "fields": {
+            "title": "Onitama",
+            "game_type": 1,
+            "gamer": 1,
+            "maker": "Arcane Wonders",
+            "number_of_players": "2",
+            "skill_level": "1"
+        }
+    }
+]
