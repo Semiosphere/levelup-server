@@ -1,0 +1,24 @@
+[
+    {
+        "model": "levelupapi.event",
+        "pk": 1,
+        "fields": {
+            "game": 1,
+            "organizer": 1,
+            "description": "Build an intergalactic empire through trade, research, conquest and grand politics.",
+            "date": "2022-05-20",
+            "time": "12:00"
+        }
+    },
+    {
+        "model": "levelupapi.event",
+        "pk": 2,
+        "fields": {
+            "game": 2,
+            "organizer": 1,
+            "description": "Assert your martial prowess by harnessing the power of various animal spirits.",
+            "date": "2022-05-20",
+            "time": "16:30"
+        }
+    }
+]
