@@ -11,3 +11,10 @@ SELECT g.id,
     g.number_of_players,
     g.skill_level
 FROM levelupapi_game g
+
+DROP TABLE levelupapi_eventgamer;
+
+INSERT INTO levelupapi_event_attendees
+VALUES (null, 1, 1)
+
+SELECT * FROM levelupapi_user;

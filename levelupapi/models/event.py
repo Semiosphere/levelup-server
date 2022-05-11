@@ -8,3 +8,4 @@ class Event(models.Model):
     description = models.CharField(max_length=50)
     date = models.DateField()
     time = models.TimeField()
+    attendees = models.ManyToManyField("Gamer", related_name="events")

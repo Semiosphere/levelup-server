@@ -3,10 +3,12 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
+from django.contrib.auth.models import User
 from levelupapi.models import Event
 from levelupapi.models import Game
 from levelupapi.models import Gamer
 from django.core.exceptions import ValidationError
+from rest_framework.decorators import action
 
 
 
@@ -71,14 +73,39 @@ class EventView(ViewSet):
         event.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
     
+    @action(methods=['post'], detail=True)
+    def signup(self, request, pk):
+        """Post request for a user to sign up for an event"""
+    
+        gamer = Gamer.objects.get(user=request.auth.user)
+        event = Event.objects.get(pk=pk)
+        event.attendees.add(gamer)
+        return Response({'message': 'Gamer added'}, status=status.HTTP_201_CREATED)
+    
+    @action(methods=['delete'], detail=True)
+    def leave(self, request, pk):
+        """DELETE request for a user to leave an event"""
+        
+        gamer = Gamer.objects.get(user=request.auth.user)
+        event = Event.objects.get(pk=pk)
+        event.attendees.remove(gamer)
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+    
 class EventSerializer(serializers.ModelSerializer):
     """JSON serializer for events
     """
     class Meta:
         model = Event
-        fields = ('id', 'game', 'organizer', 'description', 'date', 'time')
-        depth = 1
+        fields = ('id', 'game', 'organizer', 'description', 'date', 'time', 'attendees')
+        depth = 2
+        
 class CreateEventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = ['id', 'game', 'description', 'date', 'time']
+
+class EventUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username']
+        
